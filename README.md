@@ -2,6 +2,9 @@
 
 This project contains a multi-service application with FastAPI backends, Next.js frontend, Qdrant vector database, and optional Ollama integration.
 
+![](https://github.com/harshspotted/JTP_PROJECT/blob/main/demo.gif)
+
+ DEMO: https://youtu.be/mkJ2wJv1fFA
 # AI-Powered Employee Skill & Project Recommendation System
 
 An intelligent system that recommends roles and training programs based on employee skills, leveraging AI for personalized career development and project matching.
