@@ -1,0 +1,75 @@
+services:
+  inference-app:
+    build:
+      context: ./backend
+      dockerfile: ../docker/Dockerfile.inference
+    ports:
+      - "8001:80"
+    environment:
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
+    depends_on:
+      - qdrant
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  crud-app:
+    build:
+      context: ./backend
+      dockerfile: ../docker/Dockerfile.crud
+    ports:
+      - "8002:80"
+    environment:
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
+    depends_on:
+      - qdrant
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../docker/Dockerfile.frontend
+    ports:
+      - "3000:3000"
+    environment:
+
+      # If using Docker Desktop
+      - NEXT_PUBLIC_INFERENCE_API_URL=http://inference-app:80
+      - NEXT_PUBLIC_CRUD_API_URL=http://crud-app:80
+
+      # # If using OrbStack
+      # - NEXT_PUBLIC_INFERENCE_API_URL=http://inference-app.test-jtp.orb.local
+      # - NEXT_PUBLIC_CRUD_API_URL=http://crud-app.test-jtp.orb.local
+
+    depends_on:
+      - inference-app
+      - crud-app
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    environment:
+      - QDRANT__SERVICE__HTTP_PORT=6333
+      - QDRANT__SERVICE__GRPC_PORT=6334
+    networks:
+      - app-network
+    restart: unless-stopped
+
+volumes:
+  qdrant_data:
+
+
+networks:
+  app-network:
+    driver: bridge

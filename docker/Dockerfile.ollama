@@ -1,0 +1,7 @@
+FROM ollama/ollama:latest
+
+# copy your wrapper script in
+COPY run_ollama.sh /usr/local/bin/run_ollama.sh
+RUN chmod +x /usr/local/bin/run_ollama.sh
+
+ENTRYPOINT [ "/bin/sh", "/usr/local/bin/run_ollama.sh" ]

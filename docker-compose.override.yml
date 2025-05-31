@@ -1,0 +1,42 @@
+services:
+  ollama:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+    networks:
+      - app-network
+    restart: unless-stopped
+    # Uncomment the following lines if you have GPU support
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+  inference-app:
+    environment:
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
+      - OLLAMA_HOST=ollama
+      - OLLAMA_PORT=11434
+
+      # If using Docker Desktop
+      - OLLAMA_BASE_URL=http://ollama:11434/v1
+
+      # # # If using OrbStack
+      # - OLLAMA_BASE_URL=http://ollama.test-jtp.orb.local/v1
+
+    depends_on:
+      - qdrant
+      - ollama
+
+volumes:
+  ollama_data:
