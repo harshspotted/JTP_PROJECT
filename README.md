@@ -74,11 +74,18 @@ Ensure you have the following installed:
 - Node.js 18+ (for local development)
 - Python 3.9+ (for local development)
 
-### Basic Setup (without Ollama)
+# Backend Environment Configuration
+# Add this to backend/.env file
+```
+OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
+OPENAI_EMBEDDING_MODEL="YOUR_OPENAI_EMBEDDING_MODEL"
+OPENAI_MODEL="YOUR_OPENAI_MODEL"
+```
+### Basic Setup (Without Ollama) [OPENAI key needed]
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/harshspotted/JTP_PROJECT
 cd jtp-test
 
 # Start all services
@@ -88,7 +95,7 @@ docker compose -f docker-compose.yml up
 make up
 ```
 
-### With Ollama Integration
+### With Ollama Integration 
 
 ```bash
 # Start all services including Ollama for enhanced AI capabilities
