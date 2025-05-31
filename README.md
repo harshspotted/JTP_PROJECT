@@ -80,6 +80,9 @@ Ensure you have the following installed:
 OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
 OPENAI_EMBEDDING_MODEL="YOUR_OPENAI_EMBEDDING_MODEL"
 OPENAI_MODEL="YOUR_OPENAI_MODEL"
+QDRANT_URL="https://27d480b7-69e2-40b2-8e13-7bbf7832282a.europe-west3-0.gcp.cloud.qdrant.io:6333"
+QDRANT_API_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.wUxby9KBN5--U0cdzB4pHF_bYyiQi1nNMJqoPnU5UVA"
+
 ```
 ### Basic Setup (Without Ollama) [OPENAI key needed]
 
@@ -96,6 +99,8 @@ make up
 ```
 
 ### With Ollama Integration 
+
+Once you click on generate analysis, the ollama will start rendering, so you will have to click again for it to give the result.
 
 ```bash
 # Start all services including Ollama for enhanced AI capabilities
