@@ -99,6 +99,8 @@ make up
 ```
 
 ### With Ollama Integration 
+## Minimum Requirement: Needs 16 Ram.
+If used without the minimum requirement, then it may not function properly.
 
 Once you click on generate analysis, the ollama will start rendering, so you will have to click again for it to give the result.
 
